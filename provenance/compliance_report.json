@@ -1,0 +1,26 @@
+{
+  "by_subject": {
+    "sub-01": {
+      "total": 112,
+      "ok": 112
+    },
+    "sub-02": {
+      "total": 112,
+      "ok": 112
+    },
+    "sub-03": {
+      "total": 112,
+      "ok": 112
+    },
+    "sub-05": {
+      "total": 110,
+      "ok": 110
+    },
+    "sub-06": {
+      "total": 112,
+      "ok": 112
+    }
+  },
+  "n_failures": 0,
+  "failures": []
+}

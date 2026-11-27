@@ -1,39 +1,95 @@
 {
-    "Name": "<xxxxx> sub-dataset of the Courtois-Neuromod project processed with fMRIPrep - fMRI PREProcessing workflow",
-    "BIDSVersion": "1.4.0",
-    "DatasetType": "derivative",
-    "GeneratedBy": [
+  "Name": "Trial-level encoding+delay OLS GLM betas",
+  "GeneratedBy": [
+    {
+      "Name": "glm_analysis.py",
+      "Description": "PSC, 32 fMRIPrep confounds, cosine drifts, first volume dropped (tmask=1), OLS; input = desc-sm4 surface BOLD"
+    }
+  ],
+  "BIDSVersion": "1.11.1",
+  "DatasetType": "derivative",
+  "SourceDatasets": [
+    {
+      "URL": "../../",
+      "Description": "TaskScape-WM raw"
+    }
+  ],
+  "TaskScapeWMProvenance": {
+    "builder": "TaskScape-WM-migration/scripts/build_taskscape_wm.py",
+    "builder_commit": "7a19cca0deb7",
+    "builder_tree_dirty": false,
+    "legacy_snapshot_tags": {
+      "pre-migration-2026-10": "d7b266d (fmri_dataset_project, branch spatial_smoothed)",
+      "pre-migration-2026-10-ncregen": "4fa4121 (fmri_dataset_project, branch noise-ceiling-regen)"
+    },
+    "inventory": "reports/inventory_2026-10-04/run_inventory.tsv",
+    "transfer_mode": "hardlink + explicit absolute symlinks for non-hardlinkable raw/fMRIPrep git-annex payloads",
+    "build_date": "2026-10-08",
+    "anatomical_inputs": {
+      "status": "external dependency; not present locally; NOT reproduced by this package",
+      "fmriprep_version": "20.2.6",
+      "fmriprep_invocation_flags": "--anat-derivatives sourcedata/smriprep --fs-subjects-dir sourcedata/smriprep/sourcedata/freesurfer --output-spaces MNI152NLin2009cAsym T1w:res-iso2mm --cifti-output 91k --use-syn-sdc --ignore slicetiming --output-layout bids (per-session jobs; see derivatives/fmriprep/code/*.sh)",
+      "required_inputs": [
         {
-            "Name": "fMRIPrep",
-            "Version": "20.2.5",
-            "CodeURL": "https://github.com/nipreps/fmriprep/archive/20.2.5.tar.gz"
-        }
-    ],
-    "HowToAcknowledge": "Please cite our paper (), and include the generated citation boilerplate within the Methods section of the text.",
-    "SourceDatasets": [
-        {
-	    "name": "cneuromod xxxxx dataset",
-            "URL": "https://github.com/courtois-neuromod/xxxxx"
+          "dataset": "cneuromod.anat.smriprep",
+          "datalad_id": "f3ef9683-0a58-4d2b-b4eb-d33d8fc3fd2b",
+          "submodule_commit": "b733038c298ee0e905ba6095ea29518ffae3a271",
+          "url": "ria+file:///data/neuromod/ria-sequoia#~cneuromod.anat.smriprep",
+          "files": [
+            "sub-XX/anat/* (sMRIPrep anatomical derivatives: desc-preproc_T1w, brain mask, dseg/probseg, surfaces, T1w->MNI xfm)",
+            "sourcedata/freesurfer/sub-XX/ (FreeSurfer recon-all subject directory)",
+            "sourcedata/freesurfer/fsaverage/"
+          ]
         },
         {
-	    "name": "cneuromod anatomical smriprep derivatives",
-            "URL": "https://github.com/courtois-neuromod/anat.smriprep"
+          "dataset": "templateflow",
+          "datalad_id": "c79c47b6-d0fb-11e8-aa11-64006a8a730f",
+          "submodule_commit": "b3e85b4f525db498fc40e915da31b032857ef75a",
+          "url": "ria+file:///data/neuromod/ria-sequoia#~templateflow",
+          "files": [
+            "tpl-MNI152NLin2009cAsym/",
+            "tpl-OASIS30ANTs/",
+            "tpl-fsLR/",
+            "tpl-fsaverage/",
+            "tpl-MNI152NLin6Asym/"
+          ]
+        },
+        {
+          "dataset": "repronim/containers",
+          "datalad_id": "b02e63c2-62c1-11e9-82b0-52540040489c",
+          "submodule_commit": "81b134ae1370a5c73b15cb23244e656b02fc3a73",
+          "files": [
+            "bids-fmriprep container image used by `datalad containers-run -n bids-fmriprep`"
+          ]
         }
-
-    ],
-    "License": "https://docs.cneuromod.ca/en/latest/ACCESS.html#data-transfer-agreement-(dta)",
-    "ReferencesAndLinks": [
-        "https://docs.cneuromod.ca/",
-	"https://doi.org/10.1038/s41592-018-0235-4"
-    ],
-    "Authors": [
-        "Pierre Bellec",
-        "Julie Boyle",
-        "Basile Pinsard"
-    ],
-    "Funding": [
-        "Courtois Foundation"
-    ],
-    "Acknowledgements": "https://docs.cneuromod.ca/en/latest/AUTHORS.html",
-    "HowToAcknowledge": "https://docs.cneuromod.ca/en/latest/ACCESS.html#how-to-acknowledge"
+      ],
+      "local_evidence": "cneuromod.multfs.fmriprep/.gitmodules, `git submodule status`, code/fmriprep_study-*_sub-XX_ses-YYY.sh"
+    },
+    "external_storage": {
+      "status": "LOCAL WORKING DATASET: raw imaging and fMRIPrep payloads (NIfTI/GIfTI/CIFTI/etc.) are absolute symlinks into the CNeuroMod RIA store; this tree is not self-contained, is not a backup and is not a release",
+      "store_prefixes": [
+        "/lustre09/project/6003287/ria-rorqual/"
+      ],
+      "dependency": "readable only while the RIA store at these paths exists and remains group-readable (owner bpinsard, group rrg-pbellec, mode 640 at build time); objects are content-addressed MD5E keys",
+      "why_not_hardlinked": "os.link -> EPERM (pilot job 22627704, 2026-10-06): kernel protected_hardlinks refuses links to files the builder user neither owns nor can write",
+      "upstream_datasets": {
+        "raw": {
+          "name": "cneuromod.multfs.raw",
+          "path": "/project/def-pbellec/xuan/cneuromod.multfs.fmriprep/sourcedata/cneuromod.multfs.raw",
+          "revision": "0500b876c858485bb2d2f74ee6197ff60d6a9a81",
+          "datalad_id": "d8e66b52-8112-4ddb-8bdc-38cc7fa8f6de",
+          "annex_dir": "/lustre09/project/6003287/ria-rorqual/d8e/66b52-8112-4ddb-8bdc-38cc7fa8f6de/annex"
+        },
+        "fmriprep": {
+          "name": "cneuromod.multfs.fmriprep",
+          "path": "/project/def-pbellec/xuan/cneuromod.multfs.fmriprep",
+          "revision": "95ac24ecddd7907c447c20d3b0a6559d6b394efa",
+          "datalad_id": "304ac9d7-afb0-4495-8372-86ed052bb6f2",
+          "annex_dir": "/lustre09/project/6003287/ria-rorqual/304/ac9d7-afb0-4495-8372-86ed052bb6f2/annex"
+        }
+      },
+      "per_file_record": "migration workspace reports/<build>/symlinks.tsv (dataset path, resolved target, annex key, size, revision, verification)",
+      "release_gate": "a distribution export must dereference every symlink (capacity-budgeted copy of actual content) and verify that no symlink in the export points to a cluster-only path"
+    }
+  }
 }
